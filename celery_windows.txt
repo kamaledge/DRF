@@ -1,0 +1,2 @@
+pip install gevent
+celery -A CRUD_project2 worker -l info -P eventlet

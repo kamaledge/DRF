@@ -1,0 +1,22 @@
+lsnrctl start (in cmd)
+in vscode: pip install cx_oracle
+
+in settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'XE',
+        'USER': 'kamal',
+        'PASSWORD': 'oracle',
+        'HOST': 'localhost',
+        'PORT': '1521'
+    }
+}
+
+
+python manage.py inspectdb > models.py
+
+needs oracle 12c or higher
+
+http://www.srikanthtechnologies.com/blog/python/django_oracle_orm.aspx
+
