@@ -1,0 +1,20 @@
+{"status":"success",
+    "data":{"lat":12.9889055,
+        "lng":77.574044,
+        "history":[
+            {"time":1594643400,
+                "temperature":75.85,
+                "apparentTemperature":77.12,
+                "dewPoint":70.76,
+                "humidity":0.85,
+                "pressure":1004.4,
+                "windSpeed":7.95,
+                "windGust":13.39,
+                "windBearing":245,
+                "cloudCover":0.92,
+                "visibility":6.712,
+                "ozone":263.2
+            }
+            ]
+            }
+}
