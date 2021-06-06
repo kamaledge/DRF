@@ -10,7 +10,7 @@ class WeatherSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class LocationSerializer(serializers.ModelSerializer):
-    weather = serializers.HyperlinkedIdentityField(view_name='weather-detail')
+    weathers = serializers.HyperlinkedRelatedField(view_name='app_name:weather-detail', read_only=True)
     class Meta:
         model = Location
-        fields = ['id', 'place', 'weather']
+        fields = ['id', 'place', 'weathers']

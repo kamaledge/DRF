@@ -11,6 +11,8 @@ router.register('weather', WeatherDetails, basename='wea')
 
 urlpatterns = [
     # path('api/',include(router.urls)),
-    path('result',get_data),
+    path('get_weather',get_data),
     path('', include(router.urls), name = 'api'),
 ]
+
+app_name = 'weather'

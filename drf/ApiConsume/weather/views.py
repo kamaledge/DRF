@@ -72,35 +72,37 @@ def get_data(request):
     if response.get('status') == 'success':
         data = response.get('data')
         history = data.get('history')
+        hist = history[-1]
+        # print(history)
         # print(Location.objects.values_list('lat'))
         print('\n')
     
 
-        for hist in history:
-            temperature = hist.get('temperature')
-            humidity = hist.get('humidity')
-            pressure = hist.get('pressure')
+        # for hist in history:
+        temperature = hist.get('temperature')
+        humidity = hist.get('humidity')
+        pressure = hist.get('pressure')
 
-            # print(str(data.get('lat')) + ' ' + str(data.get('lng')))    
-            # print(Location.objects.values('place'))
+        # print(str(data.get('lat')) + ' ' + str(data.get('lng')))    
+        # print(Location.objects.values('place'))
+        
+        if (str(data.get('lat')) + ' ' + str(data.get('lng'))) in place_vals:
+            print('Location data already present.')
+        else:
+            place = str(data.get('lat')) + ' ' + str(data.get('lng'))
+            Location.objects.create(place=place)
+            cnt_loc = Location.objects.count()
+            try:
+                l_id = Location.objects.get(pk=cnt_loc)
+
+            except Exception as e:
+                print('Error occured due to ',e )
             
-            if (str(data.get('lat')) + ' ' + str(data.get('lng'))) in place_vals:
-                print('Location data already present')
-            else:
-                place = str(data.get('lat')) + ' ' + str(data.get('lng'))
-                Location.objects.create(place=place)
-                cnt_loc = Location.objects.count()
-                try:
-                    l_id = Location.objects.get(pk=cnt_loc)
-
-                except Exception as e:
-                    print('Error occured due to ',e )
-                
-                Weather.objects.create(location=l_id, stat_name='temperature', stat_value=str(temperature))
-                Weather.objects.create(location=l_id, stat_name='humidity', stat_value=str(humidity))
-                Weather.objects.create(location=l_id, stat_name='pressure', stat_value=str(pressure))
-                print('records created')
-        return HttpResponse('Values Returned')
+            Weather.objects.create(location=l_id, stat_name='temperature', stat_value=str(temperature))
+            Weather.objects.create(location=l_id, stat_name='humidity', stat_value=str(humidity))
+            Weather.objects.create(location=l_id, stat_name='pressure', stat_value=str(pressure))
+            print('records created')
+            return HttpResponse('Values Returned')
 
     return HttpResponse('No Value found')
 
