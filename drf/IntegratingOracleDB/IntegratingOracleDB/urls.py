@@ -1,7 +1,7 @@
-"""ApiConsume URL Configuration
+"""IntegratingOracleDB URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.0/topics/http/urls/
+    https://docs.djangoproject.com/en/3.1/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -13,12 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
 from django.contrib import admin
 from django.urls import path, include
+from kamal_oracle import views # type: ignore
+from rest_framework.routers import DefaultRouter
+
+# creating router router
+router = DefaultRouter()
+
+# Register StudentViewSet with router
+router.register('dbapi', views.KntPerson2details, basename='oracledb')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('weather/',include('weather.urls', namespace='app_name')),
-    path('map/', include('map.urls')),
+    path('', include(router.urls)),
+    path('rawsql', views.getdatafromsql),
 ]
+
