@@ -16,7 +16,7 @@ class Singer(models.Model):
 
 class Song(models.Model):
     title = models.CharField(max_length=100)
-    singer = models.ForeignKey(Singer, on_delete=CASCADE, related_name='song') # related name is used to show the data of linked table too
+    singer = models.ForeignKey(Singer, on_delete=CASCADE, related_name='songs') # related name is used to show the data of linked table too
     duration = models.IntegerField()
 
     def __str__(self):
